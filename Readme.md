@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Елизавета Костина](https://up.htmlacademy.ru/javascript/23/user/1251955).
-* Наставник: `Неизвестно`.
+* Наставник: [Антон Попов](https://htmlacademy.ru/profile/joker).
 
 ---
 
