@@ -1,14 +1,10 @@
 const ADS_COUNT = 10;
 
-const COORDINATES = {
-  lat: {
-    min: 35.65,
-    max: 35.7,
-  },
-  lng: {
-    min: 139.7,
-    max:  139.8,
-  },
+const Coordinates = {
+  LAT_MIN: 35.65,
+  LAT_MAX: 35.7,
+  LNG_MIN: 139.7,
+  LNG_MAX:  139.8,
 };
 
 const PRICE = {
@@ -95,8 +91,8 @@ const getAvatar = (index) => `img/avatars/user${index < 9 ?  `0${index + 1}` : i
 
 // Д20. Константы, используемые внутри функций, создаются вне функций и используются повторно через замыкания.
 const similarAds = new Array(ADS_COUNT).fill(null).map((element, index) => {
-  const lat = getRandomPositiveFloat(COORDINATES.lat.min, COORDINATES.lat.max, 5);
-  const lng = getRandomPositiveFloat(COORDINATES.lng.min, COORDINATES.lng.max, 5);
+  const lat = getRandomPositiveFloat(Coordinates.LAT_MIN, Coordinates.LAT_MAX, 5);
+  const lng = getRandomPositiveFloat(Coordinates.LNG_MIN, Coordinates.LNG_MAX, 5);
   return {
     author: {
       avatar: getAvatar(index),
@@ -121,4 +117,4 @@ const similarAds = new Array(ADS_COUNT).fill(null).map((element, index) => {
   };
 });
 
-similarAds;
+console.log(similarAds);
