@@ -1,3 +1,3 @@
-import {createOfferList} from './data.js';
+import {createOfferList} from './mocks/data.js';
 
 createOfferList();
