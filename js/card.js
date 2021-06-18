@@ -1,7 +1,10 @@
-import {createOfferList} from './mocks/data.js';
-import {TYPES} from './mocks/data.js';
+import {createOfferList, TYPES} from './mocks/data.js';
+import {declOfNum} from './mocks/util.js';
 
 const DEFAULT_AVATAR = 'img/avatars/default.png';
+const GUESTS_WORD_FORMS = ['гостя', 'гостей', 'гостей'];
+const ROOMS_WORD_FORMS = ['комната', 'комнаты', 'комнат'];
+
 
 const offers = createOfferList();
 const popupTemplateElement = document.querySelector('#card')
@@ -27,7 +30,7 @@ const createPopupsMarkup = (array) => {
     popupElement.querySelector('.popup__text--address').textContent = offer.address;
     popupElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
     popupElement.querySelector('.popup__type').textContent = getType(offer.type);
-    popupElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
+    popupElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} ${declOfNum(offer.rooms, ROOMS_WORD_FORMS)} для ${offer.guests} ${declOfNum(offer.guests, GUESTS_WORD_FORMS)}`;
     popupElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
     descriptionElement.textContent = offer.description;
 
