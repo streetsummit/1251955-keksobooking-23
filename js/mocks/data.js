@@ -93,4 +93,7 @@ const createOfferList = () => new Array(OFFERS_COUNT).fill(null).map((element, i
   };
 });
 
-export {createOfferList};
+export {
+  createOfferList,
+  TYPES
+};
