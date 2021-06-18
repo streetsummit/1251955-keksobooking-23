@@ -29,13 +29,13 @@ const GUESTS = {
   max: 100,
 };
 
-const TYPES = [
-  'palace',
-  'flat',
-  'house',
-  'bungalow',
-  'hotel',
-];
+const TYPES = {
+  palace: 'Дворец',
+  flat: 'Квартира',
+  house: 'Дом',
+  bungalow: 'Бунгало',
+  hotel: 'Отель',
+};
 
 const CHEKINS = [
   '12:00',
@@ -77,7 +77,7 @@ const createOfferList = () => new Array(OFFERS_COUNT).fill(null).map((element, i
       title:  `Заголовок объекта № ${index + 1}`,
       address: `${lat}, ${lng}`,
       price: getRandomPositiveInteger(PRICE.min, PRICE.max),
-      type: getRandomArrayElement(TYPES),
+      type: getRandomArrayElement(Object.keys(TYPES)),
       rooms: getRandomPositiveInteger(ROOMS.min, ROOMS.max),
       guests: getRandomPositiveInteger(GUESTS.min, GUESTS.max),
       checkin: getRandomArrayElement(CHEKINS),
