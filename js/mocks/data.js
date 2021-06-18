@@ -5,7 +5,7 @@ import {
   getRandomLengthArray
 } from './util.js';
 
-const ADS_COUNT = 10;
+const OFFERS_COUNT = 10;
 
 const Coordinates = {
   LAT_MIN: 35.65,
@@ -66,8 +66,7 @@ const PHOTOS = [
 
 const getAvatar = (index) => `img/avatars/user${index < 9 ?  `0${index + 1}` : index + 1}.png`;
 
-
-const createOfferList = () => new Array(ADS_COUNT).fill(null).map((element, index) => {
+const createOfferList = () => new Array(OFFERS_COUNT).fill(null).map((element, index) => {
   const lat = getRandomPositiveFloat(Coordinates.LAT_MIN, Coordinates.LAT_MAX, 5);
   const lng = getRandomPositiveFloat(Coordinates.LNG_MIN, Coordinates.LNG_MAX, 5);
   return {
