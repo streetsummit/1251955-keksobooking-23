@@ -1,4 +1,4 @@
-import {TYPES} from './mocks/data.js';
+import {typesDictionary} from './mocks/data.js';
 import {declOfNum} from './global-util.js';
 
 const DEFAULT_AVATAR = 'img/avatars/default.png';
@@ -10,7 +10,7 @@ const popupTemplateElement = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-const getType = (type) => TYPES[type];
+const getType = (type) => typesDictionary[type];
 
 const createPopupsMarkup = (array) => {
   const popupListFragment = document.createDocumentFragment();

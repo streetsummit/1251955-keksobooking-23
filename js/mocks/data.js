@@ -27,7 +27,7 @@ const GUESTS = {
   max: 100,
 };
 
-const TYPES = {
+const typesDictionary = {
   palace: 'Дворец',
   flat: 'Квартира',
   house: 'Дом',
@@ -75,7 +75,7 @@ const createOfferList = (count) => new Array(count).fill(null).map((element, ind
       title:  `Заголовок объекта № ${index + 1}`,
       address: `${lat}, ${lng}`,
       price: getRandomPositiveInteger(PRICE.min, PRICE.max),
-      type: getRandomArrayElement(Object.keys(TYPES)),
+      type: getRandomArrayElement(Object.keys(typesDictionary)),
       rooms: getRandomPositiveInteger(ROOMS.min, ROOMS.max),
       guests: getRandomPositiveInteger(GUESTS.min, GUESTS.max),
       checkin: getRandomArrayElement(CHEKINS),
@@ -93,5 +93,5 @@ const createOfferList = (count) => new Array(count).fill(null).map((element, ind
 
 export {
   createOfferList,
-  TYPES
+  typesDictionary
 };
