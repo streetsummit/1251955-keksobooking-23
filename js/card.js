@@ -1,5 +1,5 @@
 import {createOfferList, TYPES} from './mocks/data.js';
-import {declOfNum} from './mocks/util.js';
+import {declOfNum} from './global-util.js';
 
 const DEFAULT_AVATAR = 'img/avatars/default.png';
 const GUESTS_WORD_FORMS = ['гостя', 'гостей', 'гостей'];
