@@ -14,20 +14,25 @@ const getRandomPositiveFloat = (min, max, digits = 1) => {
 
 const getRandomArrayElement = (array) => array[getRandomPositiveInteger(0, array.length - 1)];
 
-
 const getRandomLengthArray = (array) => {
-  const RandomLengthArray = [];
-  array.map((element) => {
-    if (Math.round(Math.random())) {
-      RandomLengthArray.push(element);
-    }
-  });
-  return RandomLengthArray;
+  const dataArray = array.slice();
+  const randomLengthArray = [];
+  const randomLength = getRandomPositiveInteger(0, dataArray.length);
+  for (let i = 0; i < randomLength; i++)
+  {
+    const position = getRandomPositiveInteger(0, dataArray.length - 1);
+    const element = dataArray.splice(position, 1)[0];
+    randomLengthArray.push(element);
+  }
+  return randomLengthArray;
 };
+
+const declOfNum = (number, words)  => words[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? number % 10 : 5]];
 
 export {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
   getRandomArrayElement,
-  getRandomLengthArray
+  getRandomLengthArray,
+  declOfNum
 };
