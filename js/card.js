@@ -1,4 +1,4 @@
-import {createOfferList, TYPES} from './mocks/data.js';
+import {TYPES} from './mocks/data.js';
 import {declOfNum} from './global-util.js';
 
 const DEFAULT_AVATAR = 'img/avatars/default.png';
@@ -6,7 +6,6 @@ const GUESTS_WORD_FORMS = ['гостя', 'гостей', 'гостей'];
 const ROOMS_WORD_FORMS = ['комната', 'комнаты', 'комнат'];
 
 
-const offers = createOfferList();
 const popupTemplateElement = document.querySelector('#card')
   .content
   .querySelector('.popup');
@@ -66,4 +65,4 @@ const createPopupsMarkup = (array) => {
   return popupListFragment;
 };
 
-export {offers, createPopupsMarkup};
+export {createPopupsMarkup};
