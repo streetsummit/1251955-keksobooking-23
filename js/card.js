@@ -10,7 +10,7 @@ const popupTemplateElement = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-const getType = (type) => typesDictionary[type];
+const getType = (type) => typesDictionary[type].typeName;
 
 const createPopupsMarkup = (array) => {
   const popupListFragment = document.createDocumentFragment();

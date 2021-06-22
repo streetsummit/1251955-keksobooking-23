@@ -28,11 +28,26 @@ const GUESTS = {
 };
 
 const typesDictionary = {
-  palace: 'Дворец',
-  flat: 'Квартира',
-  house: 'Дом',
-  bungalow: 'Бунгало',
-  hotel: 'Отель',
+  bungalow: {
+    typeName: 'Бунгало',
+    price: 0,
+  },
+  flat: {
+    typeName: 'Квартира',
+    price: 1000,
+  },
+  hotel: {
+    typeName: 'Отель',
+    price: 3000,
+  },
+  house: {
+    typeName: 'Дом',
+    price: 5000,
+  },
+  palace: {
+    typeName: 'Дворец',
+    price: 10000,
+  },
 };
 
 const CHEKINS = [
