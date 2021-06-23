@@ -27,9 +27,7 @@ const setMinPrice = () => {
 };
 
 const setFormValidity = () => {
-  typeSelect.addEventListener('change', () => {
-    setMinPrice();
-  });
+  typeSelect.addEventListener('change', setMinPrice); // Д4. Из названия обработчика события и функции-колбэка следует, что это обработчик.
 
   roomNumberSelect.addEventListener('change', (evt) => {
     const roomNumber = +evt.target.value;
