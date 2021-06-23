@@ -1,6 +1,7 @@
 import {typesDictionary} from './mocks/data.js';
 
 const adFormElement = document.querySelector('.ad-form');
+const adFieldsetElements = adFormElement.querySelectorAll('fieldset');
 const priceInput = adFormElement.querySelector('#price');
 const typeSelect = adFormElement.querySelector('#type');
 
@@ -8,6 +9,11 @@ const roomNumberSelect = adFormElement.querySelector('#room_number');
 
 const guestNumberSelect = adFormElement.querySelector('#capacity');
 const guestNumberOptions = guestNumberSelect.querySelectorAll('option');
+
+const disableAdForm = () => {
+  adFormElement.classList.add('ad-form--disabled');
+  adFieldsetElements.forEach((element) => element.setAttribute('disabled', ''));
+};
 
 const setMinPrice = () => {
   const minPriceValue = typesDictionary[typeSelect.value].price;
@@ -37,6 +43,6 @@ const setFormValidity = () => {
   });
 };
 
-export {setFormValidity};
+export {disableAdForm, setFormValidity};
 
 
