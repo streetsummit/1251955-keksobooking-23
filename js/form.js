@@ -15,6 +15,11 @@ const disableAdForm = () => {
   adFieldsetElements.forEach((element) => element.setAttribute('disabled', ''));
 };
 
+const activateAdForm = () => {
+  adFormElement.classList.remove('ad-form--disabled');
+  adFieldsetElements.forEach((element) => element.removeAttribute('disabled'));
+};
+
 const setMinPrice = () => {
   const minPriceValue = typesDictionary[typeSelect.value].price;
   priceInput.setAttribute('placeholder', minPriceValue);
@@ -43,6 +48,6 @@ const setFormValidity = () => {
   });
 };
 
-export {disableAdForm, setFormValidity};
+export {disableAdForm, activateAdForm, setFormValidity};
 
 

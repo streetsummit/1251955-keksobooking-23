@@ -6,4 +6,10 @@ const disableFilterForm = () => {
   [...fieldFilterElements].forEach((element) => element.setAttribute('disabled', ''));
 };
 
-export {disableFilterForm};
+const activateFilterForm = () => {
+  formFilterElement.classList.remove('ad-form--disabled');
+  [...fieldFilterElements].forEach((element) => element.removeAttribute('disabled'));
+};
+
+export {disableFilterForm, activateFilterForm};
+
