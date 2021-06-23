@@ -5,8 +5,6 @@ import {
   getRandomLengthArray
 } from './util.js';
 
-const OFFERS_COUNT = 10;
-
 const Coordinates = {
   LAT_MIN: 35.65,
   LAT_MAX: 35.7,
@@ -29,12 +27,27 @@ const GUESTS = {
   max: 100,
 };
 
-const TYPES = {
-  palace: 'Дворец',
-  flat: 'Квартира',
-  house: 'Дом',
-  bungalow: 'Бунгало',
-  hotel: 'Отель',
+const typesDictionary = {
+  bungalow: {
+    typeName: 'Бунгало',
+    price: 0,
+  },
+  flat: {
+    typeName: 'Квартира',
+    price: 1000,
+  },
+  hotel: {
+    typeName: 'Отель',
+    price: 3000,
+  },
+  house: {
+    typeName: 'Дом',
+    price: 5000,
+  },
+  palace: {
+    typeName: 'Дворец',
+    price: 10000,
+  },
 };
 
 const CHEKINS = [
@@ -66,7 +79,7 @@ const PHOTOS = [
 
 const getAvatar = (index) => `img/avatars/user${index < 9 ?  `0${index + 1}` : index + 1}.png`;
 
-const createOfferList = () => new Array(OFFERS_COUNT).fill(null).map((element, index) => {
+const createOfferList = (count) => new Array(count).fill(null).map((element, index) => {
   const lat = getRandomPositiveFloat(Coordinates.LAT_MIN, Coordinates.LAT_MAX, 5);
   const lng = getRandomPositiveFloat(Coordinates.LNG_MIN, Coordinates.LNG_MAX, 5);
   return {
@@ -77,7 +90,7 @@ const createOfferList = () => new Array(OFFERS_COUNT).fill(null).map((element, i
       title:  `Заголовок объекта № ${index + 1}`,
       address: `${lat}, ${lng}`,
       price: getRandomPositiveInteger(PRICE.min, PRICE.max),
-      type: getRandomArrayElement(Object.keys(TYPES)),
+      type: getRandomArrayElement(Object.keys(typesDictionary)),
       rooms: getRandomPositiveInteger(ROOMS.min, ROOMS.max),
       guests: getRandomPositiveInteger(GUESTS.min, GUESTS.max),
       checkin: getRandomArrayElement(CHEKINS),
@@ -95,5 +108,5 @@ const createOfferList = () => new Array(OFFERS_COUNT).fill(null).map((element, i
 
 export {
   createOfferList,
-  TYPES
+  typesDictionary
 };
