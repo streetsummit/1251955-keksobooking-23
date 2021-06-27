@@ -20,3 +20,16 @@ L.tileLayer(
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
 ).addTo(map);
+
+const mainPinIcon = L.icon({
+  iconUrl: '../img/main-pin.svg',
+  iconSize: [52, 52],
+  iconAnchor: [26, 0],
+});
+
+L.marker(
+  INITIAL_POINT,
+  {
+    icon: mainPinIcon,
+    draggable: true,
+  }).addTo(map);
