@@ -31,7 +31,7 @@ const onTypeElementChange = () => {
 };
 
 const setFormValidity = () => {
-  typeElement.addEventListener('change', onTypeElementChange); // Д4. Из названия обработчика события и функции-колбэка следует, что это обработчик.
+  typeElement.addEventListener('change', onTypeElementChange);
 
   roomNumberSelect.addEventListener('change', (evt) => {
     const roomNumber = +evt.target.value;
