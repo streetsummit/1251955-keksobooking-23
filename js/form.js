@@ -2,8 +2,8 @@ import {typesDictionary} from './mocks/data.js';
 
 const adFormElement = document.querySelector('.ad-form');
 const adFieldsetElements = adFormElement.querySelectorAll('fieldset');
-const priceInput = adFormElement.querySelector('#price');
-const typeSelect = adFormElement.querySelector('#type');
+const priceElement = adFormElement.querySelector('#price');
+const typeElement = adFormElement.querySelector('#type');
 
 const roomNumberSelect = adFormElement.querySelector('#room_number');
 
@@ -21,13 +21,13 @@ const activateAdForm = () => {
 };
 
 const setMinPrice = () => {
-  const minPriceValue = typesDictionary[typeSelect.value].price;
-  priceInput.setAttribute('placeholder', minPriceValue);
-  priceInput.setAttribute('min', minPriceValue);
+  const minPriceValue = typesDictionary[typeElement.value].price;
+  priceElement.setAttribute('placeholder', minPriceValue);
+  priceElement.setAttribute('min', minPriceValue);
 };
 
 const setFormValidity = () => {
-  typeSelect.addEventListener('change', setMinPrice); // Д4. Из названия обработчика события и функции-колбэка следует, что это обработчик.
+  typeElement.addEventListener('change', setMinPrice); // Д4. Из названия обработчика события и функции-колбэка следует, что это обработчик.
 
   roomNumberSelect.addEventListener('change', (evt) => {
     const roomNumber = +evt.target.value;
