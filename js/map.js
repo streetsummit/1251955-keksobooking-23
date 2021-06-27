@@ -7,20 +7,8 @@ const INITIAL_POINT = {
 };
 const INITIAL_MAP_ZOOM = 10;
 
-const map = L.map('map-canvas')
-  .setView([INITIAL_POINT.lat, INITIAL_POINT.lng], INITIAL_MAP_ZOOM)
-  .on('load', () => {
-    activateAdForm();
-    activateFilterForm();
-    setAddress(INITIAL_POINT);
-  });
 
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(map);
+const map = L.map('map-canvas');
 
 const mainPinIcon = L.icon({
   iconUrl: '../img/main-pin.svg',
@@ -34,3 +22,22 @@ L.marker(
     icon: mainPinIcon,
     draggable: true,
   }).addTo(map);
+
+const initMap = () => {
+  map
+    .on('load', () => {
+      activateAdForm();
+      activateFilterForm();
+      setAddress(INITIAL_POINT);
+    })
+    .setView([INITIAL_POINT.lat, INITIAL_POINT.lng], INITIAL_MAP_ZOOM);
+
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+  ).addTo(map);
+};
+
+export {initMap};
