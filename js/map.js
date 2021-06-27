@@ -16,12 +16,16 @@ const mainPinIcon = L.icon({
   iconAnchor: [26, 0],
 });
 
-L.marker(
+const mainPin = L.marker(
   INITIAL_POINT,
   {
     icon: mainPinIcon,
     draggable: true,
   }).addTo(map);
+
+mainPin.on('drag', (evt) => {
+  setAddress(evt.target.getLatLng());
+});
 
 const initMap = () => {
   map
