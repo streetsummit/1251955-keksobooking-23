@@ -1,5 +1,6 @@
 import {typesDictionary} from './mocks/data.js';
 
+const COORD_PRECISION = 5;
 const adFormElement = document.querySelector('.ad-form');
 const adFieldsetElements = adFormElement.querySelectorAll('fieldset');
 const priceElement = adFormElement.querySelector('#price');
@@ -9,6 +10,9 @@ const roomNumberSelect = adFormElement.querySelector('#room_number');
 
 const guestNumberSelect = adFormElement.querySelector('#capacity');
 const guestNumberOptions = guestNumberSelect.querySelectorAll('option');
+const addressElement = adFormElement.querySelector('#address');
+
+addressElement.setAttribute('readonly', '');
 
 const disableAdForm = () => {
   adFormElement.classList.add('ad-form--disabled');
@@ -46,6 +50,10 @@ const setFormValidity = () => {
   });
 };
 
-export {disableAdForm, activateAdForm, setFormValidity};
+const setAddress = ({lat, lng}) => {
+  addressElement.value = `${lat.toFixed(COORD_PRECISION)}, ${lng.toFixed(COORD_PRECISION)}`;
+};
+
+export {disableAdForm, activateAdForm, setFormValidity, setAddress};
 
 

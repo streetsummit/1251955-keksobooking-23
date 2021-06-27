@@ -1,4 +1,4 @@
-import { activateAdForm } from './form.js';
+import { activateAdForm, setAddress } from './form.js';
 import { activateFilterForm } from './filter.js';
 
 const INITIAL_POINT = {
@@ -12,6 +12,7 @@ const map = L.map('map-canvas')
   .on('load', () => {
     activateAdForm();
     activateFilterForm();
+    setAddress(INITIAL_POINT);
   });
 
 L.tileLayer(
