@@ -1,14 +1,25 @@
 import {typesDictionary} from './mocks/data.js';
 
+const COORD_PRECISION = 5;
+const Capacity = { // roomNumber : validGuestNumbers
+  100: [0],
+  1: [1],
+  2: [1, 2],
+  3: [1, 2, 3],
+};
+
 const adFormElement = document.querySelector('.ad-form');
 const adFieldsetElements = adFormElement.querySelectorAll('fieldset');
-const priceInput = adFormElement.querySelector('#price');
-const typeSelect = adFormElement.querySelector('#type');
+const priceElement = adFormElement.querySelector('#price');
+const typeElement = adFormElement.querySelector('#type');
 
 const roomNumberSelect = adFormElement.querySelector('#room_number');
 
 const guestNumberSelect = adFormElement.querySelector('#capacity');
 const guestNumberOptions = guestNumberSelect.querySelectorAll('option');
+const addressElement = adFormElement.querySelector('#address');
+
+addressElement.setAttribute('readonly', '');
 
 const disableAdForm = () => {
   adFormElement.classList.add('ad-form--disabled');
@@ -20,32 +31,36 @@ const activateAdForm = () => {
   adFieldsetElements.forEach((element) => element.removeAttribute('disabled'));
 };
 
-const setMinPrice = () => {
-  const minPriceValue = typesDictionary[typeSelect.value].price;
-  priceInput.setAttribute('placeholder', minPriceValue);
-  priceInput.setAttribute('min', minPriceValue);
+const onTypeElementChange = () => {
+  const minPriceValue = typesDictionary[typeElement.value].price;
+  priceElement.setAttribute('placeholder', minPriceValue);
+  priceElement.setAttribute('min', minPriceValue);
 };
 
-const setFormValidity = () => {
-  typeSelect.addEventListener('change', setMinPrice); // Д4. Из названия обработчика события и функции-колбэка следует, что это обработчик.
-
-  roomNumberSelect.addEventListener('change', (evt) => {
-    const roomNumber = +evt.target.value;
-
-    guestNumberOptions.forEach((element, index) => {
-      if (roomNumber === 100 && +element.value === 0) {
-        element.disabled = false;
-        guestNumberSelect.selectedIndex = index;
-      } else if (roomNumber === 100 && +element.value !== 0 || +element.value === 0 || +element.value > roomNumber) {
-        element.disabled = true;
-      } else {
-        element.disabled = false;
-        guestNumberSelect.selectedIndex = index;
-      }
-    });
+const checkCapacity = () => {
+  const roomNumber = +roomNumberSelect[roomNumberSelect.selectedIndex].value;
+  const validGuestNumbers = Capacity[roomNumber];
+  guestNumberOptions.forEach((element) => {
+    const guestNumber = +element.value;
+    element.disabled = !validGuestNumbers.includes(guestNumber);
+    element.selected = (guestNumber === validGuestNumbers[0]);
   });
 };
 
-export {disableAdForm, activateAdForm, setFormValidity};
+checkCapacity();
+
+const setFormValidity = () => {
+  typeElement.addEventListener('change', onTypeElementChange);
+
+  roomNumberSelect.addEventListener('change', () => {
+    checkCapacity();
+  });
+};
+
+const setAddress = ({lat, lng}) => {
+  addressElement.value = `${lat.toFixed(COORD_PRECISION)}, ${lng.toFixed(COORD_PRECISION)}`;
+};
+
+export {disableAdForm, activateAdForm, setFormValidity, setAddress};
 
 
