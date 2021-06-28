@@ -31,7 +31,7 @@ const activateAdForm = () => {
   adFieldsetElements.forEach((element) => element.removeAttribute('disabled'));
 };
 
-const onTypeElementChange = () => {
+const setMinPrice = () => {
   const minPriceValue = typesDictionary[typeElement.value].price;
   priceElement.setAttribute('placeholder', minPriceValue);
   priceElement.setAttribute('min', minPriceValue);
@@ -47,19 +47,25 @@ const checkCapacity = () => {
   });
 };
 
-checkCapacity();
+const onTypeElementChange = () => {
+  setMinPrice();
+};
+
+const onRoomNumberSelectChange = () => {
+  checkCapacity();
+};
 
 const setFormValidity = () => {
   typeElement.addEventListener('change', onTypeElementChange);
-
-  roomNumberSelect.addEventListener('change', () => {
-    checkCapacity();
-  });
+  roomNumberSelect.addEventListener('change', onRoomNumberSelectChange());
 };
 
 const setAddress = ({lat, lng}) => {
   addressElement.value = `${lat.toFixed(COORD_PRECISION)}, ${lng.toFixed(COORD_PRECISION)}`;
 };
+
+checkCapacity();
+setMinPrice();
 
 export {disableAdForm, activateAdForm, setFormValidity, setAddress};
 
