@@ -1,6 +1,13 @@
 import {typesDictionary} from './mocks/data.js';
 
 const COORD_PRECISION = 5;
+const Capacity = { // roomNumber : validGuestNumbers
+  100: [0],
+  1: [1],
+  2: [1, 2],
+  3: [1, 2, 3],
+};
+
 const adFormElement = document.querySelector('.ad-form');
 const adFieldsetElements = adFormElement.querySelectorAll('fieldset');
 const priceElement = adFormElement.querySelector('#price');
@@ -30,23 +37,23 @@ const onTypeElementChange = () => {
   priceElement.setAttribute('min', minPriceValue);
 };
 
+const checkCapacity = () => {
+  const roomNumber = +roomNumberSelect[roomNumberSelect.selectedIndex].value;
+  const validGuestNumbers = Capacity[roomNumber];
+  guestNumberOptions.forEach((element) => {
+    const guestNumber = +element.value;
+    element.disabled = !validGuestNumbers.includes(guestNumber);
+    element.selected = (guestNumber === validGuestNumbers[0]);
+  });
+};
+
+checkCapacity();
+
 const setFormValidity = () => {
   typeElement.addEventListener('change', onTypeElementChange);
 
-  roomNumberSelect.addEventListener('change', (evt) => {
-    const roomNumber = +evt.target.value;
-
-    guestNumberOptions.forEach((element, index) => {
-      if (roomNumber === 100 && +element.value === 0) {
-        element.disabled = false;
-        guestNumberSelect.selectedIndex = index;
-      } else if (roomNumber === 100 && +element.value !== 0 || +element.value === 0 || +element.value > roomNumber) {
-        element.disabled = true;
-      } else {
-        element.disabled = false;
-        guestNumberSelect.selectedIndex = index;
-      }
-    });
+  roomNumberSelect.addEventListener('change', () => {
+    checkCapacity();
   });
 };
 
