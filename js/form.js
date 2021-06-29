@@ -57,7 +57,7 @@ const onRoomNumberSelectChange = () => {
 
 const setFormValidity = () => {
   typeElement.addEventListener('change', onTypeElementChange);
-  roomNumberSelect.addEventListener('change', onRoomNumberSelectChange());
+  roomNumberSelect.addEventListener('change', onRoomNumberSelectChange);
 };
 
 const setAddress = ({lat, lng}) => {
