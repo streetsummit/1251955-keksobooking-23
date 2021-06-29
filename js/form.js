@@ -12,12 +12,12 @@ const adFormElement = document.querySelector('.ad-form');
 const adFieldsetElements = adFormElement.querySelectorAll('fieldset');
 const priceElement = adFormElement.querySelector('#price');
 const typeElement = adFormElement.querySelector('#type');
-
 const roomNumberSelect = adFormElement.querySelector('#room_number');
-
 const guestNumberSelect = adFormElement.querySelector('#capacity');
 const guestNumberOptions = guestNumberSelect.querySelectorAll('option');
 const addressElement = adFormElement.querySelector('#address');
+const timeInElement = adFormElement.querySelector('#timein');
+const timeOutElement = adFormElement.querySelector('#timeout');
 
 addressElement.setAttribute('readonly', '');
 
@@ -47,6 +47,14 @@ const checkCapacity = () => {
   });
 };
 
+const onTimeInElementChange = () => {
+  timeOutElement.value = timeInElement.value;
+};
+
+const onTimeOutElementChange = () => {
+  timeInElement.value = timeOutElement.value;
+};
+
 const onTypeElementChange = () => {
   setMinPrice();
 };
@@ -58,6 +66,8 @@ const onRoomNumberSelectChange = () => {
 const setFormValidity = () => {
   typeElement.addEventListener('change', onTypeElementChange);
   roomNumberSelect.addEventListener('change', onRoomNumberSelectChange);
+  timeInElement.addEventListener('change', onTimeInElementChange);
+  timeOutElement.addEventListener('change', onTimeOutElementChange);
 };
 
 const setAddress = ({lat, lng}) => {
