@@ -3,7 +3,7 @@ import { activateFilterForm } from './filter.js';
 import { createOfferList } from './mocks/data.js';
 import { createPopupMarkup } from './card.js';
 
-const INITIAL_POINT = {
+const initialPoint = {
   lat: 35.68950,
   lng: 139.69171,
 };
@@ -13,13 +13,13 @@ const OFFERS_COUNT = 10;
 const map = L.map('map-canvas');
 
 const mainPinIcon = L.icon({
-  iconUrl: '../img/main-pin.svg',
+  iconUrl: './img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26, 0],
 });
 
 const mainPin = L.marker(
-  INITIAL_POINT,
+  initialPoint,
   {
     icon: mainPinIcon,
     draggable: true,
@@ -32,15 +32,14 @@ mainPin.on('drag', (evt) => {
 const offers = createOfferList(OFFERS_COUNT);
 
 const pinIcon = L.icon({
-  iconUrl: '../img/pin.svg',
+  iconUrl: './img/pin.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 0]},
 );
 
 const createPin = (data) => {
-  const {location, ...rest} = data;
   const pin = L.marker(
-    location,
+    data.location,
     {
       icon: pinIcon,
     },
@@ -48,7 +47,7 @@ const createPin = (data) => {
   pin
     .addTo(map)
     .bindPopup(
-      createPopupMarkup(rest),
+      createPopupMarkup(data),
     );
 };
 
@@ -62,9 +61,9 @@ const initMap = () => {
     .on('load', () => {
       activateAdForm();
       activateFilterForm();
-      setAddress(INITIAL_POINT);
+      setAddress(initialPoint);
     })
-    .setView([INITIAL_POINT.lat, INITIAL_POINT.lng], INITIAL_MAP_ZOOM);
+    .setView([initialPoint.lat, initialPoint.lng], INITIAL_MAP_ZOOM);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
