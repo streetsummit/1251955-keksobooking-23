@@ -1,5 +1,8 @@
 import { typesDictionary } from './card.js';
+import { sendData } from './api.js';
+import { createSuccessMessage, createErrorMessage } from './global-util.js';
 import { resetMap } from './map.js';
+
 
 const COORD_PRECISION = 5;
 const Capacity = { // roomNumber : validGuestNumbers
@@ -92,6 +95,17 @@ resetFormButton.addEventListener('click', onResetFormButtonClick);
 checkCapacity();
 setMinPrice();
 
-export { disableAdForm, activateAdForm, setFormValidity, setAddress, resetActions };
+const setAdFormSubmit = () => {
+  adFormElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+
+    sendData(createSuccessMessage, createErrorMessage, formData);
+  });
+};
+
+
+export { disableAdForm, activateAdForm, setFormValidity, setAddress, setAdFormSubmit, resetActions };
 
 
