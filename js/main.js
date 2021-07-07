@@ -1,5 +1,6 @@
 import './map.js';
 import { showAlert } from './global-util.js';
+import { setFormValidity } from './form.js';
 import { initMap, renderPinList } from './map.js';
 import { getData } from './api.js';
 

@@ -1,4 +1,5 @@
 import { typesDictionary } from './card.js';
+import { resetMap } from './map.js';
 
 const COORD_PRECISION = 5;
 const Capacity = { // roomNumber : validGuestNumbers
@@ -18,6 +19,7 @@ const guestNumberOptions = guestNumberSelect.querySelectorAll('option');
 const addressElement = adFormElement.querySelector('#address');
 const timeInElement = adFormElement.querySelector('#timein');
 const timeOutElement = adFormElement.querySelector('#timeout');
+const resetFormButton = adFormElement.querySelector('.ad-form__reset');
 
 addressElement.setAttribute('readonly', '');
 
@@ -74,9 +76,22 @@ const setAddress = ({lat, lng}) => {
   addressElement.value = `${lat.toFixed(COORD_PRECISION)}, ${lng.toFixed(COORD_PRECISION)}`;
 };
 
+const resetActions = () => {
+  adFormElement.reset();
+  setMinPrice();
+  resetMap();
+};
+
+const onResetFormButtonClick = (evt) => {
+  evt.preventDefault();
+  resetActions();
+};
+
+resetFormButton.addEventListener('click', onResetFormButtonClick);
+
 checkCapacity();
 setMinPrice();
 
-export {disableAdForm, activateAdForm, setFormValidity, setAddress};
+export { disableAdForm, activateAdForm, setFormValidity, setAddress, resetActions };
 
 

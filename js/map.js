@@ -71,4 +71,11 @@ const initMap = () => {
   ).addTo(map);
 };
 
-export { initMap, renderPinList };
+const resetMap = () => {
+  mainPin.setLatLng(initialPoint);
+  map.setView(initialPoint);
+  setAddress(initialPoint);
+  map.closePopup();
+};
+
+export { initMap, renderPinList, resetMap };
