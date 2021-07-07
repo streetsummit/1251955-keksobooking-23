@@ -1,4 +1,4 @@
-import {typesDictionary} from './mocks/data.js';
+import { typesDictionary } from './card.js';
 
 const COORD_PRECISION = 5;
 const Capacity = { // roomNumber : validGuestNumbers

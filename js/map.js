@@ -1,6 +1,5 @@
 import { activateAdForm, setAddress } from './form.js';
 import { activateFilterForm } from './filter.js';
-import { createOfferList } from './mocks/data.js';
 import { createPopupMarkup } from './card.js';
 
 const initialPoint = {
@@ -8,7 +7,6 @@ const initialPoint = {
   lng: 139.69171,
 };
 const INITIAL_MAP_ZOOM = 10;
-const OFFERS_COUNT = 10;
 
 const map = L.map('map-canvas');
 
@@ -28,8 +26,6 @@ const mainPin = L.marker(
 mainPin.on('drag', (evt) => {
   setAddress(evt.target.getLatLng());
 });
-
-const offers = createOfferList(OFFERS_COUNT);
 
 const pinIcon = L.icon({
   iconUrl: './img/pin.svg',
@@ -51,9 +47,11 @@ const createPin = (data) => {
     );
 };
 
-offers.forEach((offer) => {
-  createPin(offer);
-});
+const renderPinList = (offers) => {
+  offers.forEach((offer) => {
+    createPin(offer);
+  });
+};
 
 
 const initMap = () => {
@@ -73,4 +71,4 @@ const initMap = () => {
   ).addTo(map);
 };
 
-export {initMap};
+export { initMap, renderPinList };

@@ -1,10 +1,31 @@
-import {typesDictionary} from './mocks/data.js';
 import {declOfNum} from './global-util.js';
 
 const DEFAULT_AVATAR = 'img/avatars/default.png';
 const GUESTS_WORD_FORMS = ['гостя', 'гостей', 'гостей'];
 const ROOMS_WORD_FORMS = ['комната', 'комнаты', 'комнат'];
 
+const typesDictionary = {
+  bungalow: {
+    typeName: 'Бунгало',
+    price: 0,
+  },
+  flat: {
+    typeName: 'Квартира',
+    price: 1000,
+  },
+  hotel: {
+    typeName: 'Отель',
+    price: 3000,
+  },
+  house: {
+    typeName: 'Дом',
+    price: 5000,
+  },
+  palace: {
+    typeName: 'Дворец',
+    price: 10000,
+  },
+};
 
 const popupTemplateElement = document.querySelector('#card')
   .content
@@ -60,4 +81,4 @@ const createPopupMarkup = ({author, offer}) => {
   return popupElement;
 };
 
-export {createPopupMarkup};
+export {createPopupMarkup, typesDictionary};
