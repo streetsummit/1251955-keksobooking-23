@@ -14,21 +14,22 @@ const createMessage = (template) => {
 
   const closeElement = (element) => {
     element.remove();
-    document.removeEventListener('keydown', onMessageEscKeydown); // не могу разобраться как исправить эту ситуацию. В демке также есть вызов до объявления
+    document.removeEventListener('keydown', onMessageEscKeydown);
     document.removeEventListener('click', onMessageClick);
   };
 
-  const onMessageEscKeydown = (evt) => {
+  //Функции объявлены декларативно для возможности применения всплытия
+  function onMessageEscKeydown (evt) {
     if (isEscEvent(evt)) {
       evt.preventDefault();
       closeElement(messageElement);
     }
-  };
+  }
 
-  const onMessageClick = (evt) => {
+  function onMessageClick (evt) {
     evt.preventDefault();
     closeElement(messageElement);
-  };
+  }
 
   document.addEventListener('keydown', onMessageEscKeydown);
   document.addEventListener('click', onMessageClick);
