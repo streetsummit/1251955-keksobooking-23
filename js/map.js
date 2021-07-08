@@ -13,7 +13,7 @@ const map = L.map('map-canvas');
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
   iconSize: [52, 52],
-  iconAnchor: [26, 0],
+  iconAnchor: [26, 52],
 });
 
 const mainPin = L.marker(
@@ -30,7 +30,7 @@ mainPin.on('drag', (evt) => {
 const pinIcon = L.icon({
   iconUrl: './img/pin.svg',
   iconSize: [40, 40],
-  iconAnchor: [20, 0]},
+  iconAnchor: [20, 40]},
 );
 
 const createPin = (data) => {
