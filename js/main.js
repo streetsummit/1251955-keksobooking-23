@@ -1,6 +1,6 @@
-import './map.js';
 import { showAlert } from './global-util.js';
-import {setFormValidity, setAdFormSubmit } from './form.js';
+import { setFormValidity } from './form.js';
+import { setAdFormSubmit } from './send-data.js';
 import { initMap, renderPinList } from './map.js';
 import { getData } from './api.js';
 

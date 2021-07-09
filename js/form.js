@@ -1,7 +1,4 @@
 import { typesDictionary } from './card.js';
-import { sendData } from './api.js';
-import { createSuccessMessage, createErrorMessage } from './global-util.js';
-import { resetMap } from './map.js';
 
 
 const COORD_PRECISION = 5;
@@ -22,7 +19,6 @@ const guestNumberOptions = guestNumberSelect.querySelectorAll('option');
 const addressElement = adFormElement.querySelector('#address');
 const timeInElement = adFormElement.querySelector('#timein');
 const timeOutElement = adFormElement.querySelector('#timeout');
-const resetFormButton = adFormElement.querySelector('.ad-form__reset');
 
 addressElement.setAttribute('readonly', '');
 
@@ -79,33 +75,14 @@ const setAddress = ({lat, lng}) => {
   addressElement.value = `${lat.toFixed(COORD_PRECISION)}, ${lng.toFixed(COORD_PRECISION)}`;
 };
 
-const resetActions = () => {
+const resetForm = () => {
   adFormElement.reset();
   setMinPrice();
-  resetMap();
 };
-
-const onResetFormButtonClick = (evt) => {
-  evt.preventDefault();
-  resetActions();
-};
-
-resetFormButton.addEventListener('click', onResetFormButtonClick);
 
 checkCapacity();
 setMinPrice();
 
-const setAdFormSubmit = () => {
-  adFormElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    const formData = new FormData(evt.target);
-
-    sendData(createSuccessMessage, createErrorMessage, formData);
-  });
-};
-
-
-export { disableAdForm, activateAdForm, setFormValidity, setAddress, setAdFormSubmit, resetActions };
+export { adFormElement, disableAdForm, activateAdForm, setFormValidity, setAddress, resetForm };
 
 
