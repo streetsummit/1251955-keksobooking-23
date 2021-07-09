@@ -1,10 +1,31 @@
-import {typesDictionary} from './mocks/data.js';
 import {declOfNum} from './global-util.js';
 
 const DEFAULT_AVATAR = 'img/avatars/default.png';
 const GUESTS_WORD_FORMS = ['гостя', 'гостей', 'гостей'];
 const ROOMS_WORD_FORMS = ['комната', 'комнаты', 'комнат'];
 
+const typesDictionary = {
+  bungalow: {
+    typeName: 'Бунгало',
+    price: 0,
+  },
+  flat: {
+    typeName: 'Квартира',
+    price: 1000,
+  },
+  hotel: {
+    typeName: 'Отель',
+    price: 3000,
+  },
+  house: {
+    typeName: 'Дом',
+    price: 5000,
+  },
+  palace: {
+    typeName: 'Дворец',
+    price: 10000,
+  },
+};
 
 const popupTemplateElement = document.querySelector('#card')
   .content
@@ -28,35 +49,36 @@ const createPopupMarkup = ({author, offer}) => {
   popupElement.querySelector('.popup__type').textContent = getType(offer.type);
   popupElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} ${declOfNum(offer.rooms, ROOMS_WORD_FORMS)} для ${offer.guests} ${declOfNum(offer.guests, GUESTS_WORD_FORMS)}`;
   popupElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
-  descriptionElement.textContent = offer.description;
+
+  offer.description
+    ? descriptionElement.textContent = offer.description
+    : descriptionElement.classList.add('hidden');
 
   featureListElement.textContent = '';
-  offer.features.forEach((item) => {
-    const feature = document.createElement('li');
-    const featureClass = `popup__feature--${item}`;
-    feature.classList.add('popup__feature', featureClass);
-    featureListElement.appendChild(feature);
-  });
 
-  offer.photos.forEach((photo) => {
-    const photoElement =  photoListElement.querySelector('.popup__photo').cloneNode(true);
-    photoElement.src = photo;
-    photoListElementFragment.appendChild(photoElement);
-  });
-  photoListElement.textContent = '';
-  photoListElement.appendChild(photoListElementFragment);
+  if (offer.features) {
+    offer.features.forEach((item) => {
+      const feature = document.createElement('li');
+      const featureClass = `popup__feature--${item}`;
+      feature.classList.add('popup__feature', featureClass);
+      featureListElement.appendChild(feature);
+    });
+  } else {
+    featureListElement.classList.add('hidden');
+  }
 
-  const checkDataAvailable = (content, element) => {
-    if (!content.length) {
-      element.classList.add('hidden');
-    }
-  };
-
-  checkDataAvailable(offer.features, featureListElement);
-  checkDataAvailable(offer.photos, photoListElement);
-  checkDataAvailable(offer.description, descriptionElement);
-
+  if (offer.photos) {
+    offer.photos.forEach((photo) => {
+      const photoElement =  photoListElement.querySelector('.popup__photo').cloneNode(true);
+      photoElement.src = photo;
+      photoListElementFragment.appendChild(photoElement);
+    });
+    photoListElement.textContent = '';
+    photoListElement.appendChild(photoListElementFragment);
+  } else {
+    photoListElement.classList.add('hidden');
+  }
   return popupElement;
 };
 
-export {createPopupMarkup};
+export {createPopupMarkup, typesDictionary};

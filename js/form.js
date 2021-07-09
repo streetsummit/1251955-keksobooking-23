@@ -1,4 +1,5 @@
-import {typesDictionary} from './mocks/data.js';
+import { typesDictionary } from './card.js';
+
 
 const COORD_PRECISION = 5;
 const Capacity = { // roomNumber : validGuestNumbers
@@ -74,9 +75,14 @@ const setAddress = ({lat, lng}) => {
   addressElement.value = `${lat.toFixed(COORD_PRECISION)}, ${lng.toFixed(COORD_PRECISION)}`;
 };
 
+const resetForm = () => {
+  adFormElement.reset();
+  setMinPrice();
+};
+
 checkCapacity();
 setMinPrice();
 
-export {disableAdForm, activateAdForm, setFormValidity, setAddress};
+export { adFormElement, disableAdForm, activateAdForm, setFormValidity, setAddress, resetForm };
 
 

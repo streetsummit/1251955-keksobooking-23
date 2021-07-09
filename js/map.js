@@ -1,6 +1,5 @@
 import { activateAdForm, setAddress } from './form.js';
 import { activateFilterForm } from './filter.js';
-import { createOfferList } from './mocks/data.js';
 import { createPopupMarkup } from './card.js';
 
 const initialPoint = {
@@ -8,14 +7,13 @@ const initialPoint = {
   lng: 139.69171,
 };
 const INITIAL_MAP_ZOOM = 10;
-const OFFERS_COUNT = 10;
 
 const map = L.map('map-canvas');
 
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
   iconSize: [52, 52],
-  iconAnchor: [26, 0],
+  iconAnchor: [26, 52],
 });
 
 const mainPin = L.marker(
@@ -29,12 +27,10 @@ mainPin.on('drag', (evt) => {
   setAddress(evt.target.getLatLng());
 });
 
-const offers = createOfferList(OFFERS_COUNT);
-
 const pinIcon = L.icon({
   iconUrl: './img/pin.svg',
   iconSize: [40, 40],
-  iconAnchor: [20, 0]},
+  iconAnchor: [20, 40]},
 );
 
 const createPin = (data) => {
@@ -51,9 +47,11 @@ const createPin = (data) => {
     );
 };
 
-offers.forEach((offer) => {
-  createPin(offer);
-});
+const renderPinList = (offers) => {
+  offers.forEach((offer) => {
+    createPin(offer);
+  });
+};
 
 
 const initMap = () => {
@@ -73,4 +71,11 @@ const initMap = () => {
   ).addTo(map);
 };
 
-export {initMap};
+const resetMap = () => {
+  mainPin.setLatLng(initialPoint);
+  map.setView(initialPoint);
+  setAddress(initialPoint);
+  map.closePopup();
+};
+
+export { initMap, renderPinList, resetMap };
