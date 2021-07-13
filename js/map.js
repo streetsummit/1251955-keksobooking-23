@@ -33,6 +33,8 @@ const pinIcon = L.icon({
   iconAnchor: [20, 40]},
 );
 
+const pinGroup = L.layerGroup().addTo(map);
+
 const createPin = (data) => {
   const pin = L.marker(
     data.location,
@@ -41,7 +43,7 @@ const createPin = (data) => {
     },
   );
   pin
-    .addTo(map)
+    .addTo(pinGroup)
     .bindPopup(
       createPopupMarkup(data),
     );
