@@ -36,12 +36,6 @@ function closeMessage (message) {
   document.removeEventListener('click', onMessageClick);
 }
 
-const handleSuccess = () => {
-  createMessage(successTemplateElement);
-  resetActions();
-};
-
-
 const handleError = () => {
   const errorElement = createMessage(errorTemplateElement);
 
@@ -55,13 +49,24 @@ const handleError = () => {
   errorButton.focus();
 };
 
-const setAdFormSubmit = () => {
+const setAdFormSubmit = (cb) => {
   adFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     const formData = new FormData(evt.target);
 
-    sendData(handleSuccess, handleError, formData);
+    sendData(
+      // Заменила handleSuccess на анонимную функцию для возможности передачи cb
+      () => {
+        createMessage(successTemplateElement);
+        resetActions();
+
+        /* В случае успешной загрузки объявлений с сервера функция setAdFormSubmit вызывается в точке входа с колбэком сброса пинов до начального состояния.
+        В случае ошибки загрузки объявлений вызывается без колбэка (без сброса пинов, тк отрисовывать нечего).
+        */
+        cb ? cb(): false;
+      },
+      handleError, formData);
   });
 };
 

@@ -70,6 +70,7 @@ const resetMap = () => {
   mainPin.setLatLng(initialPoint);
   map.setView(initialPoint);
   setAddress(initialPoint);
+  removeAllPins();
   map.closePopup();
 };
 

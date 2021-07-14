@@ -17,7 +17,9 @@ getData(
     setFilterChange(() => renderPinList(offers));
     setResetButtonClick(() => renderPinList(offers));
     activateFilterForm();
+    setAdFormSubmit(() => renderPinList(offers));
   },
-  () => showAlert('Не удалось получить данные'));
-
-setAdFormSubmit();
+  () => {
+    showAlert('Не удалось получить данные');
+    setAdFormSubmit();
+  });
