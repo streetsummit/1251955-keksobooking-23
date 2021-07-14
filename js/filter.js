@@ -11,5 +11,9 @@ const activateFilterForm = () => {
   [...fieldFilterElements].forEach((element) => element.removeAttribute('disabled'));
 };
 
-export {disableFilterForm, activateFilterForm};
+const resetFilter = () => {
+  formFilterElement.reset();
+};
+
+export {disableFilterForm, activateFilterForm, resetFilter };
 
