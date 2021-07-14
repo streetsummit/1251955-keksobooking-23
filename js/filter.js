@@ -61,6 +61,7 @@ const filterOffers = ({offer}) => {
 };
 
 const renderPinList = (offers) => {
+  removeAllPins();
   offers
     .slice()
     .filter(filterOffers)
@@ -72,7 +73,6 @@ const renderPinList = (offers) => {
 
 const setFilterChange = (cb) => {
   formFilterElement.addEventListener('change', () => {
-    removeAllPins();
     cb();
   });
 };
