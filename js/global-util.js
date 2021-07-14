@@ -19,4 +19,13 @@ const showAlert = (message) => {
   document.body.append(alertContainer);
 };
 
-export { declOfNum, showAlert, isEscEvent };
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export { declOfNum, showAlert, isEscEvent, debounce };
