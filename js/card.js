@@ -1,6 +1,5 @@
 import {declOfNum} from './utils.js';
 
-const DEFAULT_AVATAR = 'img/avatars/default.png';
 const GUESTS_WORD_FORMS = ['гостя', 'гостей', 'гостей'];
 const ROOMS_WORD_FORMS = ['комната', 'комнаты', 'комнат'];
 
@@ -33,15 +32,12 @@ const popupTemplateElement = document.querySelector('#card')
 
 const getType = (type) => typesDictionary[type].typeName;
 
-const createPopupMarkup = ({author, offer}) => {
+const createPopupMarkup = ({offer}) => {
   const popupElement = popupTemplateElement.cloneNode(true);
-  const avatarElement = popupElement.querySelector('.popup__avatar');
   const photoListElement = popupElement.querySelector('.popup__photos');
   const featureListElement = popupElement.querySelector('.popup__features');
   const descriptionElement = popupElement.querySelector('.popup__description');
   const photoListElementFragment = document.createDocumentFragment();
-
-  avatarElement.src = author.avatar.length ? author.avatar : DEFAULT_AVATAR;
 
   popupElement.querySelector('.popup__title').textContent = offer.title;
   popupElement.querySelector('.popup__text--address').textContent = offer.address;
