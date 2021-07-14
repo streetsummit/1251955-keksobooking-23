@@ -1,5 +1,4 @@
 import { activateAdForm, setAddress } from './form.js';
-import { activateFilterForm } from './filter.js';
 import { createPopupMarkup } from './card.js';
 
 const initialPoint = {
@@ -55,7 +54,6 @@ const initMap = () => {
   map
     .on('load', () => {
       activateAdForm();
-      activateFilterForm();
       setAddress(initialPoint);
     })
     .setView([initialPoint.lat, initialPoint.lng], INITIAL_MAP_ZOOM);
