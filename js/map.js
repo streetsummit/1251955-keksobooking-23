@@ -49,12 +49,7 @@ const createPin = (data) => {
     );
 };
 
-const renderPinList = (offers) => {
-  offers.forEach((offer) => {
-    createPin(offer);
-  });
-};
-
+const removeAllPins = () => pinGroup.clearLayers();
 
 const initMap = () => {
   map
@@ -80,4 +75,4 @@ const resetMap = () => {
   map.closePopup();
 };
 
-export { initMap, renderPinList, resetMap };
+export { initMap, createPin, resetMap, removeAllPins };

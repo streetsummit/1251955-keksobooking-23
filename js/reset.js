@@ -10,11 +10,12 @@ const resetActions = () => {
   resetFilter();
 };
 
-const onResetFormButtonClick = (evt) => {
-  evt.preventDefault();
-  resetActions();
+const setResetButtonClick = (cb) => {
+  resetFormButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    resetActions();
+    cb();
+  });
 };
 
-resetFormButton.addEventListener('click', onResetFormButtonClick);
-
-export { resetActions };
+export { resetActions, setResetButtonClick };
