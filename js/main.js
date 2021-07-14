@@ -1,4 +1,4 @@
-import { showAlert, debounce } from './global-util.js';
+import { showAlert, debounce } from './utils.js';
 import { setFormValidity, disableAdForm } from './form.js';
 import { setAdFormSubmit } from './send-data.js';
 import { initMap } from './map.js';

@@ -1,4 +1,4 @@
-import {declOfNum} from './global-util.js';
+import {declOfNum} from './utils.js';
 
 const DEFAULT_AVATAR = 'img/avatars/default.png';
 const GUESTS_WORD_FORMS = ['гостя', 'гостей', 'гостей'];
