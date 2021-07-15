@@ -1,5 +1,4 @@
 import { activateAdForm, setAddress } from './form.js';
-import { activateFilterForm } from './filter.js';
 import { createPopupMarkup } from './card.js';
 
 const initialPoint = {
@@ -33,6 +32,8 @@ const pinIcon = L.icon({
   iconAnchor: [20, 40]},
 );
 
+const pinGroup = L.layerGroup().addTo(map);
+
 const createPin = (data) => {
   const pin = L.marker(
     data.location,
@@ -41,24 +42,18 @@ const createPin = (data) => {
     },
   );
   pin
-    .addTo(map)
+    .addTo(pinGroup)
     .bindPopup(
       createPopupMarkup(data),
     );
 };
 
-const renderPinList = (offers) => {
-  offers.forEach((offer) => {
-    createPin(offer);
-  });
-};
-
+const removeAllPins = () => pinGroup.clearLayers();
 
 const initMap = () => {
   map
     .on('load', () => {
       activateAdForm();
-      activateFilterForm();
       setAddress(initialPoint);
     })
     .setView([initialPoint.lat, initialPoint.lng], INITIAL_MAP_ZOOM);
@@ -78,4 +73,4 @@ const resetMap = () => {
   map.closePopup();
 };
 
-export { initMap, renderPinList, resetMap };
+export { initMap, createPin, resetMap, removeAllPins };

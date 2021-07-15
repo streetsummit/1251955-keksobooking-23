@@ -1,15 +1,30 @@
-import { showAlert } from './global-util.js';
-import { setFormValidity } from './form.js';
+import { showAlert, debounce } from './utils.js';
+import { setFormValidity, disableAdForm } from './form.js';
 import { setAdFormSubmit } from './send-data.js';
-import { initMap, renderPinList } from './map.js';
+import { initMap } from './map.js';
 import { getData } from './api.js';
+import { renderPinList, setFilterChange, activateFilterForm, disableFilterForm } from './filter.js';
+import { setResetButtonClick } from './reset.js';
 
-const OFFERS_COUNT = 10;
+const RERENDER_DELAY = 500;
 
+disableFilterForm();
+disableAdForm();
 initMap();
 setFormValidity();
 
-getData((offers) => renderPinList(offers.slice(0, OFFERS_COUNT)),
-  () => showAlert('Не удалось получить данные'));
-
-setAdFormSubmit();
+getData(
+  (offers) => {
+    renderPinList(offers);
+    setFilterChange(debounce(
+      () => renderPinList(offers),
+      RERENDER_DELAY,
+    ));
+    setResetButtonClick(() => renderPinList(offers));
+    activateFilterForm();
+    setAdFormSubmit(() => renderPinList(offers));
+  },
+  () => {
+    showAlert('Не удалось получить данные');
+    setAdFormSubmit();
+  });
