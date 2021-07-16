@@ -1,4 +1,5 @@
 import { typesDictionary } from './card.js';
+import { setAvatarPreview, setPhotosPreview } from './photos.js';
 
 
 const COORD_PRECISION = 5;
@@ -82,6 +83,8 @@ const resetForm = () => {
 
 checkCapacity();
 setMinPrice();
+setAvatarPreview();
+setPhotosPreview();
 
 export { adFormElement, disableAdForm, activateAdForm, setFormValidity, setAddress, resetForm };
 

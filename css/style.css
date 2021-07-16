@@ -297,15 +297,21 @@ fieldset {
           align-items: center;
 
   margin-right: 10px;
-  padding: 0 15px;
 
   width: 70px;
   height: 70px;
+  flex-shrink: 0;
 
-  text-align: center;
+  justify-content: center;
 
   border-radius: 5px;
   background-color: #dadada;
+}
+
+.ad-form-header__preview img {
+  object-fit: cover;
+  width: 70px;
+  height: 70px;
 }
 
 .ad-form__field {
@@ -576,11 +582,23 @@ fieldset {
   margin-right: 10px;
   margin-bottom: 10px;
 
-  width: 70px;
+  min-width: 70px;
   height: 70px;
 
   background-color: #e4e4de;
   border-radius: 5px;
+}
+
+.ad-form__photo img {
+  object-fit: cover;
+  width: 70px;
+  height: 70px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+.ad-form__photo img:last-child {
+  margin-right: 0;
 }
 
 .ad-form__element--submit {
