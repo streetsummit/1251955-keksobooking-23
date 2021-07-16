@@ -6,13 +6,15 @@ const avatarPreview = document.querySelector('.ad-form-header__preview img');
 const photosChooser = document.querySelector('#images');
 const photoPreviewContainer = document.querySelector('.ad-form__photo');
 
+const checkFileType = (file) => {
+  const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((it) => fileName.endsWith(it));
+};
 
 const setAvatarPreview = () => {
   avatarChooser.addEventListener('change', () => {
     const file = avatarChooser.files[0];
-    const fileName = file.name.toLowerCase();
-    const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-    if (matches) {
+    if (checkFileType(file)) {
       const reader = new FileReader();
       reader.addEventListener('load', () => {
         avatarPreview.src = reader.result;
@@ -32,10 +34,7 @@ const setPhotosPreview = () => {
       const photoListFragment = document.createDocumentFragment();
 
       files.forEach((file) => {
-        const fileName = file.name.toLowerCase();
-        const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-        if (matches) {
-
+        if (checkFileType(file)) {
           const reader = new FileReader();
           reader.addEventListener('load', () => {
             const photo = document.createElement('img');
