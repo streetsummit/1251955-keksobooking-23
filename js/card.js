@@ -32,12 +32,54 @@ const popupTemplateElement = document.querySelector('#card')
 
 const getType = (type) => typesDictionary[type].typeName;
 
+const createDescriptionMarkup = (container, description) => {
+  if (description) {
+    container.textContent = description;
+  } else {
+    container.classList.add('hidden');
+  }
+};
+
+const createFeatureListMarkup = (container, features) => {
+  container.textContent = '';
+
+  const createFeatureItem = (item) => {
+    const feature = document.createElement('li');
+    const featureClass = `popup__feature--${item}`;
+    feature.classList.add('popup__feature', featureClass);
+    container.appendChild(feature);
+  };
+
+  if (features) {
+    features.forEach(createFeatureItem);
+  } else {
+    container.classList.add('hidden');
+  }
+};
+
+const createPhotoListMarkup = (container, photos) => {
+  const photoListElementFragment = document.createDocumentFragment();
+
+  const createPhotoItem = (photo) => {
+    const photoElement =  container.querySelector('.popup__photo').cloneNode(true);
+    photoElement.src = photo;
+    photoListElementFragment.appendChild(photoElement);
+  };
+
+  if (photos) {
+    photos.forEach(createPhotoItem);
+    container.textContent = '';
+    container.appendChild(photoListElementFragment);
+  } else {
+    container.classList.add('hidden');
+  }
+};
+
 const createPopupMarkup = ({offer}) => {
   const popupElement = popupTemplateElement.cloneNode(true);
   const photoListElement = popupElement.querySelector('.popup__photos');
   const featureListElement = popupElement.querySelector('.popup__features');
   const descriptionElement = popupElement.querySelector('.popup__description');
-  const photoListElementFragment = document.createDocumentFragment();
 
   popupElement.querySelector('.popup__title').textContent = offer.title;
   popupElement.querySelector('.popup__text--address').textContent = offer.address;
@@ -46,34 +88,10 @@ const createPopupMarkup = ({offer}) => {
   popupElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} ${declOfNum(offer.rooms, ROOMS_WORD_FORMS)} для ${offer.guests} ${declOfNum(offer.guests, GUESTS_WORD_FORMS)}`;
   popupElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
 
-  offer.description
-    ? descriptionElement.textContent = offer.description
-    : descriptionElement.classList.add('hidden');
+  createDescriptionMarkup(descriptionElement, offer.description);
+  createFeatureListMarkup(featureListElement, offer.features);
+  createPhotoListMarkup(photoListElement, offer.photos);
 
-  featureListElement.textContent = '';
-
-  if (offer.features) {
-    offer.features.forEach((item) => {
-      const feature = document.createElement('li');
-      const featureClass = `popup__feature--${item}`;
-      feature.classList.add('popup__feature', featureClass);
-      featureListElement.appendChild(feature);
-    });
-  } else {
-    featureListElement.classList.add('hidden');
-  }
-
-  if (offer.photos) {
-    offer.photos.forEach((photo) => {
-      const photoElement =  photoListElement.querySelector('.popup__photo').cloneNode(true);
-      photoElement.src = photo;
-      photoListElementFragment.appendChild(photoElement);
-    });
-    photoListElement.textContent = '';
-    photoListElement.appendChild(photoListElementFragment);
-  } else {
-    photoListElement.classList.add('hidden');
-  }
   return popupElement;
 };
 

@@ -24,7 +24,9 @@ const setAvatarPreview = () => {
   });
 };
 
-const resetAvatarPreview = () => avatarPreview.src = DEFAULT_AVATAR;
+const resetAvatarPreview = () => {
+  avatarPreview.src = DEFAULT_AVATAR;
+};
 
 const setPhotosPreview = () => {
   photosChooser.addEventListener('change', () => {
@@ -49,7 +51,8 @@ const setPhotosPreview = () => {
   });
 };
 
-const resetPhotosPreview = () => photoPreviewContainer.textContent = '';
-
+const resetPhotosPreview = () => {
+  photoPreviewContainer.textContent = '';
+};
 
 export { setAvatarPreview, setPhotosPreview, resetAvatarPreview, resetPhotosPreview };
